@@ -2,6 +2,7 @@
 
 ## Aims
 - To launch the nodejs sample app using Docker containers
+- To create an image using a Dockerfile
 
 ## Notes
 
