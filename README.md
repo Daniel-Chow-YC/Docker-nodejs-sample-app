@@ -25,6 +25,8 @@
 - docker rm
 - docker rmi
 
+- docker inspect
+
 ### docker build .
 flags:
 - `-t` or `--tag` to name the image
