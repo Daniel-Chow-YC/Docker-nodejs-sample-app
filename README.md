@@ -1,13 +1,16 @@
-# Docker -- Nodejs Sample App
+# Docker -- Nodejs Sample App With Nginx Reverse Proxy
 
 ## Aims
 - To launch the nodejs sample app using Docker containers
 - To create an image using a Dockerfile
+- To use Nginx reverse proxy so can access app webpage on port 80
 
 ## Instructions
 - Run `docker build -t app .` to create image
-- Run `docker run -p 3000:3000 app` to launch container with the app running
-  - You can now access the app on `localhost:3000`
+- Run `docker run -p 80:80 -p 3000:3000 app` to launch container with the app running
+  - You can now access the app on `localhost` or on `localhost:3000`
+- If you want to only be able to access the app on port 80 run:
+  - `docker run -p 80:80 app`
 
 ## Notes
 
@@ -54,3 +57,8 @@ flags:
 - `ADD <src> <dest>` The ADD instruction will copy new files from <src> and add them to the container's filesystem at path <dest>.
   - the major difference is that ADD can do more than COPY:
   - eg ADD allows <src> to be a URL
+
+### Running/starting services on Docker
+- Docker images do not save running processes. Therefore, your RUN command executes only during docker build phase and stops after the build is completed. Instead, you need to specify the command when the container is started using the CMD or ENTRYPOINT commands
+- Or create a provision script and run that using CMD
+- More info here: https://stackoverflow.com/questions/25135897/how-to-automatically-start-a-service-when-running-a-docker-container
