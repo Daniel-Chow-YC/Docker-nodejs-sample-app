@@ -59,6 +59,25 @@ flags:
 - `ADD <src> <dest>` The ADD instruction will copy new files from <src> and add them to the container's filesystem at path <dest>.
   - the major difference is that ADD can do more than COPY:
   - eg ADD allows <src> to be a URL
+  
+### Network Types
+
+#### Bridge Network
+- Default network
+- Containers on a bridge network get their own IP
+- Containers on separate bridges are isolated -- can't talk to containers on other bridge networks
+- However can use port mappings
+
+#### Overlay Networks
+- Is a single layer 2 network tat spans multiple hosts (nodes)
+- ``docker network create -d overlay <name-of-multihost-network>``
+- However is for containers only, ie cant talk to VMs or physical machines
+
+#### MACVLAN
+- Gives every container its own IP address and MAC address on the existing network
+- So containers are visible on existing VLANS
+- But requires promiscuous mode -- which cloud providers don't usually allow
+- IPVLAN is similar and doesn't require promiscuous mode but it is still experimental
 
 ### Running/starting services on Docker
 - Docker images do not save running processes. Therefore, your RUN command executes only during docker build phase and stops after the build is completed. Instead, you need to specify the command when the container is started using the CMD or ENTRYPOINT commands
